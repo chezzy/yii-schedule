@@ -35,6 +35,28 @@ class EventController extends CController
         throw new CHttpException(400, 'Bad Request');
     }
 
+    /**
+     * Handles updating of Events and Adding of Reminders
+     * @param  int $id The model ID
+     */
+    public function actionSave($id = NULL)
+    {
+        if ($id != NULL)
+            $model = $this->loadModel($id);
+        else
+            $model = new Events;
+
+        if (isset($_POST['Events']))
+        {
+            $model->attributes = $_POST['Events'];
+
+            if ($model->save())
+                $this->redirect($this->createUrl('/event/save', array('id' => $model->id)));
+        }
+
+        $this->render('save', array('model' => $model));
+    }
+
 
     /**
      * Returns a model, or throws an exception if it is not found
