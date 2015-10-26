@@ -1,0 +1,8 @@
+{  
+  "minimum-stability" : "dev",
+  "require": {
+	"yiisoft/yii": "1.1.*",
+    "phpmailer/phpmailer": "dev-master",
+    "ircmaxell/password-compat": "dev-master"
+  }
+}
