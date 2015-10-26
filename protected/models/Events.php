@@ -143,4 +143,15 @@ class Events extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	/**
+	 * Retrieves the $_GET['date'] parameter
+	 */
+	private function getDate()
+	{
+		if (isset($_GET['date']))
+			return $_GET['date'];
+
+		return gmdate("Y-m-d");
+	}
 }
