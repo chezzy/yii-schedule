@@ -57,6 +57,19 @@ class EventController extends CController
         $this->render('save', array('model' => $model));
     }
 
+    /**
+     * Deletes an event
+     * @param  int     $id    The Model ID
+     */
+    public function actionDelete($id = NULL)
+    {
+        $model = $this->loadModel($id);
+
+        if ($model->delete())
+            $this->redirect($this->createUrl('/event'));
+
+        throw new CHttpException(400, 'Bad Request');
+    }
 
     /**
      * Returns a model, or throws an exception if it is not found
