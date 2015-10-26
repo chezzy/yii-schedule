@@ -73,6 +73,20 @@ class Events extends CActiveRecord
 	}
 
 	/**
+	 * Before validation, convert the $_POST-ed date to an unix timestmap
+	 * @return [type] [description]
+	 */
+	public function beforeValidate()
+	{
+		$this->time = (int)strtotime($this->time);
+
+		// Set the user_id to be the current user
+		$this->user_id = Yii::app()->user->id;
+
+		return parent::beforeValidate();
+	}
+
+	/**
 	 * Adds the CTimestampBehavior to this class
 	 * @return array
 	 */
