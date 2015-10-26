@@ -20,6 +20,23 @@ class EventController extends CController
     }
 
     /**
+     * Ajax rendering of partial
+     * @param  int $id The model ID
+     */
+    public function actionDetails($id = NULL)
+    {
+        if (Yii::app()->request->isAjaxRequest)
+        {
+            $model = $this->loadModel($id);
+
+            $this->renderPartial('details', array('model' => $model));
+            Yii::app()->end();
+        }
+        throw new CHttpException(400, 'Bad Request');
+    }
+
+
+    /**
      * Returns a model, or throws an exception if it is not found
      * @param  int            $id    The ID of the model to find
      * @return Events::model
