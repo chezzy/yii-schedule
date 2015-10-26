@@ -18,4 +18,22 @@ class EventController extends CController
 
         $this->render('index', array('model' => $model));
     }
+
+    /**
+     * Returns a model, or throws an exception if it is not found
+     * @param  int            $id    The ID of the model to find
+     * @return Events::model
+     */
+    private function loadModel($id)
+    {
+        if ($id == NULL)
+            throw new CHttpException(400, 'Bad Request');
+
+        $model = Events::model()->findByPk($id);
+
+        if ($model == NULL)
+            throw new CHttpException(404, 'No model with that ID was found');
+
+        return $model;
+    }
 }
