@@ -114,7 +114,7 @@ class Events extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($between = false)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -128,10 +128,14 @@ class Events extends CActiveRecord
 		$criteria->compare('created',$this->created);
 		$criteria->compare('updated',$this->updated);
 
+		if ($between)
+			$criteria->addBetweenCondition('time', strtotime($this->getDate() . ' 00:00:00'), strtotime($this->getDate() . ' 23:59:59'));
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+
 
 	/**
 	 * Returns the static model of the specified AR class.
