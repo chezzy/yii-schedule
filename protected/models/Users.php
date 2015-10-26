@@ -15,6 +15,8 @@
  */
 class Users extends CActiveRecord
 {
+	private $_oldAttributes = array();
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -64,6 +66,33 @@ class Users extends CActiveRecord
 			'updated' => 'Updated',
 		);
 	}
+
+	/**
+	 * After finding a user and getting a valid result
+	 * store the old attributes in $this->_oldAttributes
+	 * @return parent::afterFind();
+	 */
+	public function afterFind()
+	{
+		if ($this !== NULL)
+			$this->_oldAttributes = $this->attributes;
+		return parent::afterFind();
+	}
+
+	/**
+	 * Before saving a user's password, password_hash it
+	 * @return parent::beforeSave()
+	 */
+	public function beforeSave()
+	{
+		if ($this->password == NULL)
+			$this->password = $this->_oldAttributes['password'];
+		else
+			$this->password = password_hash($this->password, PASSWORD_BCRYPT, array('cost' => 13));
+
+		return parent::beforeSave();
+	}
+
 
 	public function behaviors()
 	{
