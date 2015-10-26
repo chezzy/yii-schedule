@@ -72,6 +72,10 @@ class Events extends CActiveRecord
 		);
 	}
 
+	/**
+	 * Adds the CTimestampBehavior to this class
+	 * @return array
+	 */
 	public function behaviors()
 	{
 		return array(

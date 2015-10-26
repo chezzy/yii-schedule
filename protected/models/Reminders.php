@@ -66,6 +66,21 @@ class Reminders extends CActiveRecord
 		);
 	}
 
+	/**
+	 * Before validation, convert the $_POST-ed date to an unix timestmap
+	 */
+	public function beforeValidate()
+	{
+		$this->time = (int)strtotime($this->time);
+		$this->offset = ($this->offset*60 + $this->time);
+
+		return parent::beforeValidate();
+	}
+
+	/**
+	 * Adds the CTimestampBehavior to this class
+	 * @return array
+	 */
 	public function behaviors()
 	{
 		return array(
