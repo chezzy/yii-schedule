@@ -2,7 +2,7 @@
 
     <div class="clearfix"></div>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php $this->widget('application.components.EventListView', array(
     'dataProvider'=>$model->search(true),
     'template' => '{items}',
     'enableSorting' => true,
