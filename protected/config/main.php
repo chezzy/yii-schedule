@@ -51,7 +51,7 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>true,
 			'rules'=>array(
-				'/' => '/', //event/index
+				'/' => 'event/index', //event/index
 				'event/date/<date:[\w-]+>' => 'event/index',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

@@ -13,14 +13,14 @@ class m151026_134852_reminders extends CDbMigration
 			'updated' => 'integer'
 		));
 
-		$this->addForeignKey('reminder_events', 'reminders', 'event_id', 'events', 'id', NULL, 'CASCADE', 'CASCADE');
+		$this->addForeignKey('reminder_events', 'reminders', 'event_id', 'event', 'id', NULL, 'CASCADE', 'CASCADE');
 	}
 
 	public function down()
 	{
-		$this->dropForeignKey('event_users', 'events');
+		$this->dropForeignKey('event_users', 'event');
 		$this->dropForeignKey('reminder_events', 'reminders');
-		$this->dropTable('events');
+		$this->dropTable('event');
 		$this->dropTable('reminders');
 	}
 

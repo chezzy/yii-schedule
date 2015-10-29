@@ -3,7 +3,7 @@
 class EventController extends CController
 {
     /**
-     * Handles displaying and searching of events
+     * Handles displaying and searching of event
      */
     public function actionIndex()
     {
@@ -13,7 +13,7 @@ class EventController extends CController
         if (isset($_GET['Events']))
             $model->attributes = $_GET['Events'];
 
-        // Only search for events belonging to this user
+        // Only search for event belonging to this user
         $model->user_id = Yii::app()->user->id;
 
         $this->render('index', array('model' => $model));

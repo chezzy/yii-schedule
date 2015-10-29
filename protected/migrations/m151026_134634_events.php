@@ -4,7 +4,7 @@ class m151026_134634_events extends CDbMigration
 {
 	public function up()
 	{
-		$this->createTable('events', array(
+		$this->createTable('event', array(
 			'id' => 'pk',
 			'user_id' => 'integer',
 			'title' => 'string',
@@ -14,7 +14,7 @@ class m151026_134634_events extends CDbMigration
 			'updated' => 'integer'
 		));
 
-		$this->addForeignKey('event_users', 'events', 'user_id', 'users', 'id', NULL, 'CASCADE', 'CASCADE');
+		$this->addForeignKey('event_users', 'event', 'user_id', 'users', 'id', NULL, 'CASCADE', 'CASCADE');
 	}
 
 	public function down()

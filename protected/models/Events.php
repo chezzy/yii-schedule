@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "events".
+ * This is the model class for table "event".
  *
- * The followings are the available columns in table 'events':
+ * The followings are the available columns in table 'event':
  * @property integer $id
  * @property integer $user_id
  * @property string $title

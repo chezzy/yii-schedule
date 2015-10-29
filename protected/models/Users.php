@@ -11,7 +11,7 @@
  * @property integer $updated
  *
  * The followings are the available model relations:
- * @property Events[] $events
+ * @property Events[] $event
  */
 class Users extends CActiveRecord
 {
@@ -49,7 +49,7 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'events' => array(self::HAS_MANY, 'Events', 'user_id'),
+			'event' => array(self::HAS_MANY, 'Events', 'user_id'),
 		);
 	}
 
