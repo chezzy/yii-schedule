@@ -55,3 +55,6 @@ crashlytics-build.properties
 
 # Vendor
 /vendor
+
+bower.json
+.bowerrc
