@@ -3,6 +3,33 @@
 class EventController extends CController
 {
     /**
+     * AccessControl filter
+     * @return array
+     */
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
+
+    /**
+     * AccessRules, only authenticated users can access this page
+     * @return array
+     */
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'users'=>array('@'),
+            ),
+            array('deny',  // deny all users
+                'users'=>array('*'),
+            ),
+        );
+    }
+
+    /**
      * Handles displaying and searching of event
      */
     public function actionIndex()

@@ -3,6 +3,33 @@
 class ReminderController extends CController
 {
     /**
+     * AccessControl filter
+     * @return array
+     */
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
+
+    /**
+     * AccessRules, only authenticated users can access this page
+     * @return array
+     */
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'users'=>array('@'),
+            ),
+            array('deny',  // deny all users
+                'users'=>array('*'),
+            ),
+        );
+    }
+
+    /**
      * BeforeAction, verifies that the request in an Ajaxy one.
      * @param  CAction $action The Action
      * @see CController::beforeAction($action)
