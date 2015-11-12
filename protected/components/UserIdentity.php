@@ -18,7 +18,6 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		$users=array(
-			// username => password
 			'demo'=>'demo',
 			'admin'=>'admin',
 		);
