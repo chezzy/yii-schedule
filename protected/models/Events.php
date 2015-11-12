@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "event".
+ * This is the model class for table "events".
  *
- * The followings are the available columns in table 'event':
+ * The followings are the available columns in table 'events':
  * @property integer $id
  * @property integer $user_id
  * @property string $title
@@ -18,6 +18,33 @@
  */
 class Events extends CActiveRecord
 {
+	/**
+	 * Retrieves the $_GET['date'] parameter
+	 */
+	private function getDate()
+	{
+        if (isset($_GET['date']))
+        	return $_GET['date'];
+        
+        return gmdate("Y-m-d");
+	}
+
+	/**
+	 * Adds the CTimestampBehavior to this class
+	 * @return array
+	 */
+	public function behaviors()
+	{
+		return array(
+			'CTimestampBehavior' => array(
+				'class' 			=> 'zii.behaviors.CTimestampBehavior',
+				'createAttribute' 	=> 'created',
+				'updateAttribute' 	=> 'updated',
+				'setUpdateOnCreate' => true
+			)
+		);
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -87,22 +114,6 @@ class Events extends CActiveRecord
 	}
 
 	/**
-	 * Adds the CTimestampBehavior to this class
-	 * @return array
-	 */
-	public function behaviors()
-	{
-		return array(
-			'CTimestampBehavior' => array(
-				'class' 			=> 'zii.behaviors.CTimestampBehavior',
-				'createAttribute' 	=> 'created',
-				'updateAttribute' 	=> 'updated',
-				'setUpdateOnCreate' => true
-			)
-		);
-	}
-
-	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:
@@ -136,7 +147,6 @@ class Events extends CActiveRecord
 		));
 	}
 
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
@@ -146,16 +156,5 @@ class Events extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-
-	/**
-	 * Retrieves the $_GET['date'] parameter
-	 */
-	private function getDate()
-	{
-		if (isset($_GET['date']))
-			return $_GET['date'];
-
-		return gmdate("Y-m-d");
 	}
 }

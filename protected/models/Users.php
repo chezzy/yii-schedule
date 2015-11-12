@@ -11,11 +11,31 @@
  * @property integer $updated
  *
  * The followings are the available model relations:
- * @property Events[] $event
+ * @property Events[] $events
  */
 class Users extends CActiveRecord
 {
+	/**
+	 * Attributes from afterFind()
+	 * @var array
+	 */
 	private $_oldAttributes = array();
+
+	/**
+	 * Adds the CTimestampBehavior to this class
+	 * @return array
+	 */
+	public function behaviors()
+	{
+		return array(
+			'CTimestampBehavior' => array(
+				'class' 			=> 'zii.behaviors.CTimestampBehavior',
+				'createAttribute' 	=> 'created',
+				'updateAttribute' 	=> 'updated',
+				'setUpdateOnCreate' => true
+			)
+		);
+	}
 
 	/**
 	 * @return string the associated database table name
@@ -33,10 +53,8 @@ class Users extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('created, updated', 'numerical', 'integerOnly'=>true),
 			array('email, password', 'length', 'max'=>255),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+			array('email, password', 'required'),
 			array('id, email, password, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
@@ -49,7 +67,7 @@ class Users extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'event' => array(self::HAS_MANY, 'Events', 'user_id'),
+			'events' => array(self::HAS_MANY, 'Events', 'user_id'),
 		);
 	}
 
@@ -91,22 +109,6 @@ class Users extends CActiveRecord
 			$this->password = password_hash($this->password, PASSWORD_BCRYPT, array('cost' => 13));
 
 		return parent::beforeSave();
-	}
-
-	/**
-	 * Adds the CTimestampBehavior to this class
-	 * @return array
-	 */
-	public function behaviors()
-	{
-		return array(
-			'CTimestampBehavior' => array(
-				'class' 			=> 'zii.behaviors.CTimestampBehavior',
-				'createAttribute' 	=> 'created',
-				'updateAttribute' 	=> 'updated',
-				'setUpdateOnCreate' => true
-			)
-		);
 	}
 
 	/**

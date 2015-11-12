@@ -6,8 +6,8 @@
  * The followings are the available columns in table 'reminders':
  * @property integer $id
  * @property integer $event_id
- * @property integer $offset
  * @property integer $time
+ * @property string  $opffset
  * @property integer $created
  * @property integer $updated
  *
@@ -16,6 +16,22 @@
  */
 class Reminders extends CActiveRecord
 {
+	/**
+	 * Adds the CTimestampBehavior to this class
+	 * @return array
+	 */
+	public function behaviors()
+	{
+		return array(
+			'CTimestampBehavior' => array(
+				'class' 			=> 'zii.behaviors.CTimestampBehavior',
+				'createAttribute' 	=> 'created',
+				'updateAttribute' 	=> 'updated',
+				'setUpdateOnCreate' => true
+			)
+		);
+	}
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,10 +48,10 @@ class Reminders extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('event_id, offset, time, created, updated', 'numerical', 'integerOnly'=>true),
+			array('event_id, time, created, updated, offset', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, event_id, offset, time, created, updated', 'safe', 'on'=>'search'),
+			array('id, event_id, time, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +75,6 @@ class Reminders extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'event_id' => 'Event',
-			'offset' => 'Offset',
 			'time' => 'Time',
 			'created' => 'Created',
 			'updated' => 'Updated',
@@ -75,22 +90,6 @@ class Reminders extends CActiveRecord
 		$this->offset = ($this->offset*60 + $this->time);
 
 		return parent::beforeValidate();
-	}
-
-	/**
-	 * Adds the CTimestampBehavior to this class
-	 * @return array
-	 */
-	public function behaviors()
-	{
-		return array(
-			'CTimestampBehavior' => array(
-				'class' 			=> 'zii.behaviors.CTimestampBehavior',
-				'createAttribute' 	=> 'created',
-				'updateAttribute' 	=> 'updated',
-				'setUpdateOnCreate' => true
-			)
-		);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 <?php
 
+Yii::import('application.components.UserIdentity');
 class LoginForm extends CFormModel
 {
 	public $username;
@@ -41,6 +42,7 @@ class LoginForm extends CFormModel
 		if ($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
 			$duration = 3600*24*30;
+			Yii::app()->user->allowAutoLogin = true;
 			Yii::app()->user->login($this->_identity,$duration);
 			return true;
 		}

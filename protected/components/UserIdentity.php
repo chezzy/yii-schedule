@@ -24,14 +24,14 @@ class UserIdentity extends CUserIdentity
 		// $this->errorCode=self::ERROR_USERNAME_INVALID;
 		// $this->errorCode=self::ERROR_PASSWORD_INVALID;
 		// $this->errorCode=self::ERROR_NONE;
-
+		
 		// PHP 5.5 BCRYPT
 		if ($record == NULL)
 			$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
 		else if (password_verify($this->password, $record->password))
 		{
 			$this->errorCode = self::ERROR_NONE;
-			$this->_id 		 = $record->id;
+			$this->_id 		 = $record->id;	
 		}
 		else
 			$this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
@@ -45,6 +45,6 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function getId()
 	{
-		return $this->_id;
+    	return $this->_id;
 	}
 }
