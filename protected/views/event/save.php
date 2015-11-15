@@ -95,7 +95,7 @@
 	$("[name^=Reminder]").parent().parent().find(".fa-times").click(function() {
 		var id = $(this).parent().find("[name^=Reminder]").attr("id");
 		var self = $(this).parent();
-		$.post("/reminder/delete/id/" + id, function() {
+		$.post("/index.php/reminder/delete/id/" + id, function() {
 			$(self).remove();
 		});
 	})
@@ -120,9 +120,9 @@
 			var url = null;
 
 			if (id == undefined)
-				url = "/reminder/save"
+				url = "/index.php/reminder/save"
 			else
-				url = "/reminder/save/id/" + id;
+				url = "/index.php/reminder/save/id/" + id;
 
 			var date = new Date();
 			$.post(url, { "Reminders" : { "event_id" : $("#event_id").val(), "time" : $(self).val(), "offset" : date.getTimezoneOffset() } }, function() {

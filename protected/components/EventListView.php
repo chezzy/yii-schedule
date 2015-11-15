@@ -59,13 +59,13 @@ class EventListView extends CListView
 		Yii::app()->clientScript->registerScript('li_click', '
 			$(".items li").click(function() {
 				var id = $(this).attr("data-attr-id");
-				$.get("/event/details/" + id, function(data) { 
+				$.get("/index.php/event/details/" + id, function(data) {
 					$(".details").replaceWith(data); 
 
 					$(".fa-times").click(function() {
 						var id = $(this).parent().attr("id");
 						var self = $(this).parent();
-						$.post("/reminder/delete/id/" + id, function() {
+						$.post("/index.php/reminder/delete/id/" + id, function() {
 							$(self).remove();
 						})
 					});

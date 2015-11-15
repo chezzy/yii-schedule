@@ -142,6 +142,7 @@ class Events extends CActiveRecord
 		if ($between)
 			$criteria->addBetweenCondition('time', strtotime($this->getDate() . ' 00:00:00'), strtotime($this->getDate() . ' 23:59:59'));
 
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

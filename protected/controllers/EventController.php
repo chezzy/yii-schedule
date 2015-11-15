@@ -40,6 +40,8 @@ class EventController extends CController
         if (isset($_GET['Events']))
             $model->attributes = $_GET['Events'];
 
+		//echo '<pre>'; print_r($_GET); die;
+
         // Only search for events belonging to this user
         $model->user_id = Yii::app()->user->id;
 
@@ -52,6 +54,8 @@ class EventController extends CController
 	 */
 	public function actionSave($id = NULL)
 	{
+		//echo '<pre>'; print_r($_POST); die;
+
 		if ($id != NULL)
 			$model = $this->loadModel($id);
 		else
@@ -77,6 +81,8 @@ class EventController extends CController
 		if (Yii::app()->request->isAjaxRequest)
 		{
 			$model = $this->loadModel($id);
+
+			//echo '<pre>'; print_r($model->reminders); die;
 
 			$this->renderPartial('details', array('model' => $model));
 			Yii::app()->end();
